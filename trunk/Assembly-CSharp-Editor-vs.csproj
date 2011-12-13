@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{256264C1-A2E5-3FC9-562D-2F01228FE255}</ProjectGuid>
+	<ProjectGuid>{EB52EB9D-9753-5798-FC68-883F11BDDEB8}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -86,11 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{2098EF13-C79A-2D99-7D31-7B3A28CD6958}</Project>
+      <Project>{03DD2512-AA9B-A082-DF82-09939EC1772D}</Project>
       <Name>Assembly-CSharp-firstpass-vs</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
-      <Project>{76187267-9E4F-4766-3425-ABBEC2AAF52E}</Project>
+      <Project>{F28C38B7-4AEF-2DA6-5ECA-B0944E670427}</Project>
       <Name>Assembly-CSharp-vs</Name>
     </ProjectReference>
   </ItemGroup>
