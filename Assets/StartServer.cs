@@ -7,7 +7,7 @@ public class StartServer : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{	
-		
+		DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame
@@ -22,6 +22,7 @@ public class StartServer : MonoBehaviour
 	public bool useNAT = false;
 	public string yourIP = "";
 	public string yourPort = "";
+	public int x = 0;
 	
 	//Starting the Main Menu
 	void OnGUI () 
@@ -35,6 +36,9 @@ public class StartServer : MonoBehaviour
 				//Starting level
 				Application.LoadLevel("City1");
 				
+				//Waiting for level to be loaded
+				Wait();
+				
    				// Connecting to the server
    				Network.Connect(remoteIP, remotePort);
 				
@@ -46,14 +50,18 @@ public class StartServer : MonoBehaviour
 				//Starting level
 				Application.LoadLevel("City1");
 				
+				
 				// Creating server
    				Network.InitializeServer(32, listenPort, useNAT);
 				
+				SetupNetworkObjects();
+				
    				// Notify our objects that the level and the network is ready
-   				foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
-   				{
-    				go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
-   				}//end foreach
+//   				foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
+//   				{
+//					Debug.Log(go.name);
+//    				go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
+//   				}//end foreach
   			}//end if
    
   			// Fields to insert ip address and port 
@@ -62,7 +70,6 @@ public class StartServer : MonoBehaviour
   		}//end if
  		else
   		{
-			
   			// Getting your ip address and port
   			yourIP = Network.player.ipAddress;
   			yourPort = Network.player.port.ToString();
@@ -90,4 +97,19 @@ public class StartServer : MonoBehaviour
             go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver);
         }//end foreach
     }
+	
+	IEnumerator Wait()
+	{
+		yield return 0;
+		yield return new WaitForSeconds(5);
+	}
+	
+	void SetupNetworkObjects()
+	{
+		Wait();
+		foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
+        {
+            go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver);
+        }//end foreach
+	}
 }
