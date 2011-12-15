@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>9.0.21022</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{75644EF4-2108-31E9-B172-7F4CD3993417}</ProjectGuid>
+	<ProjectGuid>{AC0F714E-2474-89C8-A2C4-A9FA470351C5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,7 +46,9 @@
   <ItemGroup>
      <Compile Include="Assets\AgentTest.cs" />
      <Compile Include="Assets\Behave\BehaveAsset.cs" />
+     <Compile Include="Assets\Control.cs" />
      <Compile Include="Assets\Instantiate.cs" />
+     <Compile Include="Assets\NetworkCamera.cs" />
      <Compile Include="Assets\Scripts\AI\SpawnEnemy.cs" />
      <Compile Include="Assets\Scripts\AI\ZombieAI.cs" />
      <Compile Include="Assets\Scripts\GUI\Crosshair.cs" />
@@ -91,11 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{DA83BA95-5D88-DF65-BBA0-3CF723461633}</Project>
+      <Project>{08BBB3EC-50B0-3F6B-6E24-2C3C8E98F6B5}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{5BACEB88-6963-652E-176F-B7CD50D8FF29}</Project>
+      <Project>{066E8985-51E5-48A3-D07C-3B0826C83549}</Project>
       <Name>Assembly-UnityScript-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
