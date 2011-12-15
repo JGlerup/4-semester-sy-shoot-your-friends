@@ -28,7 +28,7 @@ public class Instantiate : MonoBehaviour
  		// Instantiating cube when Network is loaded
 //		TextMesh t = (TextMesh)text.GetComponent(typeof(TextMesh));
 //		t.text = "" + Network.player.ipAddress + "";
- 		Network.Instantiate(gamePlayer, location, transform.rotation, 0);
+// 		Network.Instantiate(gamePlayer, location, transform.rotation, 0);
 //		Network.Instantiate(house, transform.position, transform.rotation, 0);
 //		Network.Instantiate(bigTree, transform.position, transform.rotation, 0);
 //		Network.Instantiate(text, location1, transform.rotation, 0);

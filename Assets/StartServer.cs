@@ -4,6 +4,8 @@ using System;
 
 public class StartServer : MonoBehaviour 
 {	
+	public Transform playerPrefab;
+	
 	// Use this for initialization
 	void Start () 
 	{	
@@ -54,7 +56,8 @@ public class StartServer : MonoBehaviour
 				// Creating server
    				Network.InitializeServer(32, listenPort, useNAT);
 				
-				SetupNetworkObjects();
+				StartCoroutine(Wait());
+//				SetupNetworkObjects();
 				
    				// Notify our objects that the level and the network is ready
 //   				foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
@@ -92,6 +95,7 @@ public class StartServer : MonoBehaviour
 	//Tells everyone that you are connected and object should be loaded
     void OnConnectedToServer()
     {
+		Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0);
         foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
         {
             go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver);
@@ -100,16 +104,21 @@ public class StartServer : MonoBehaviour
 	
 	IEnumerator Wait()
 	{
-		yield return 0;
-		yield return new WaitForSeconds(5);
+//		yield return 0;
+		yield return new WaitForSeconds(5.0F);
+		Debug.Log("5 sek");
+		SetupNetworkObjects();
+		Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0);
 	}
 	
 	void SetupNetworkObjects()
 	{
-		Wait();
+		
 		foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
         {
+			Debug.Log(go.name);
             go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver);
         }//end foreach
+
 	}
 }

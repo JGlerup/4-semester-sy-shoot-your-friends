@@ -14,11 +14,11 @@ public class SpawnEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.time > spawnTime + respawnTime)
-        {
-            Instantiate(enemy, transform.position, transform.rotation);
-            spawnTime = Time.time;
-            respawnTime = 10 * Random.value;
-        }
+//        if (Time.time > spawnTime + respawnTime)
+//        {
+//            Instantiate(enemy, transform.position, transform.rotation);
+//            spawnTime = Time.time;
+//            respawnTime = 10 * Random.value;
+//        }
 	}
 }
