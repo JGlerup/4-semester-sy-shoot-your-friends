@@ -95,7 +95,7 @@ public class StartServer : MonoBehaviour
 	//Tells everyone that you are connected and object should be loaded
     void OnConnectedToServer()
     {
-		Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0);
+        //Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0);
         foreach(GameObject go in FindObjectsOfType(typeof(GameObject)))
         {
             go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver);
@@ -108,7 +108,7 @@ public class StartServer : MonoBehaviour
 		yield return new WaitForSeconds(5.0F);
 		Debug.Log("5 sek");
 		SetupNetworkObjects();
-		Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0);
+        //Network.Instantiate(playerPrefab, new Vector3(25, 2, 60),transform.rotation,0)
 	}
 	
 	void SetupNetworkObjects()
