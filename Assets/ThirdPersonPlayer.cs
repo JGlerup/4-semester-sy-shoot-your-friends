@@ -3,12 +3,12 @@ using System.Collections;
 
 public class ThirdPersonPlayer : MonoBehaviour
 {
-    //public AudioClip die;
-    private int teamNo;
+    public AudioClip die;
+    public int TeamNo {get; set;}
     // Use this for initialization
     void Start()
-    {
-        teamNo = networkView.group;
+    {		
+       Debug.Log(TeamNo);
     }
 
     // Update is called once per frame
@@ -16,9 +16,11 @@ public class ThirdPersonPlayer : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            Shoot();
+//            networkView.RPC("Shoot", RPCMode.All, transform.position);
+			Shoot();
         }
     }
+	
 
     void Shoot()
     {
@@ -29,13 +31,23 @@ public class ThirdPersonPlayer : MonoBehaviour
         if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
         {
             Debug.Log("You shot: " + hit.transform.gameObject.name + " " + teamNo);
-            hit.collider.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)hit.collider.GetComponent(typeof(ThirdPersonPlayer));
+            hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
         }
     }
+	
+	[RPC]
+	void playDieSound(Vector3 pos)
+	{
+		AudioSource.PlayClipAtPoint(die, pos);
+	}
+	
 
-    void ApplyDamage()
+    void ApplyDamage(Vector3 pos)
     {
-        GameObject.Find("Player(Clone)").audio.Play();
-
+//        GameObject.Find("Player(Clone)").audio.Play();
+ 		networkView.RPC("playDieSound", RPCMode.All, pos);
+//			AudioSource.PlayClipAtPoint(die, pos);
+		
     }
 }
