@@ -11,7 +11,8 @@ public class TeamGUI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
 	}
 
@@ -23,23 +24,33 @@ public class TeamGUI : MonoBehaviour {
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
             Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 1);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)playerPrefab.gameObject.GetComponent(typeof(ThirdPersonPlayer));
+			player.TeamNo = 1;
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 100, 180, 40), "Team 2"))
         {
             Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 2);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)playerPrefab.gameObject.GetComponent(typeof(ThirdPersonPlayer));
+			player.TeamNo = 2;
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
-            Application.Quit();
+            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 2);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)playerPrefab.gameObject.GetComponent(typeof(ThirdPersonPlayer));
+			player.TeamNo = 3;
+            DisableMenu();
         }
 
-        if (GUI.Button(new Rect(55, 200, 180, 40), "Exit game"))
+        if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
-            Application.Quit();
+            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 2);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)playerPrefab.gameObject.GetComponent(typeof(ThirdPersonPlayer));
+			player.TeamNo = 4;
+            DisableMenu();
         }
         GUI.EndGroup();
         
