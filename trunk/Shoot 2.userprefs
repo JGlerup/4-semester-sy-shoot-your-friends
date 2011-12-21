@@ -1,15 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ThirdPersonPlayer.cs">
     <Files>
+      <File FileName="Assets\ThirdPersonPlayer.cs" Line="39" Column="1" />
       <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" Line="1" Column="1" />
-      <File FileName="Assets\StartServer.cs" Line="111" Column="82" />
-      <File FileName="Assets\Scripts\AI\ZombieAI.cs" Line="75" Column="1" />
-      <File FileName="Assets\Instantiate.cs" Line="31" Column="1" />
-      <File FileName="Assets\Scripts\AI\SpawnEnemy.cs" Line="22" Column="12" />
-      <File FileName="Assets\Control.cs" Line="23" Column="79" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" Line="105" Column="10" />
-      <File FileName="Assets\NetworkCamera.cs" Line="21" Column="2" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

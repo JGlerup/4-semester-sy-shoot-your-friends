@@ -29,12 +29,13 @@ public class ThirdPersonPlayer : MonoBehaviour
         if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
         {
             Debug.Log("You shot: " + hit.transform.gameObject.name + " " + teamNo);
-            hit.collider.SendMessage("ApplyDamage", SendMessageOptions.DontRequireReceiver);
+            hit.collider.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver);
         }
     }
 
     void ApplyDamage()
     {
-        audio.Play();
+        GameObject.Find("Player(Clone)").audio.Play();
+
     }
 }
