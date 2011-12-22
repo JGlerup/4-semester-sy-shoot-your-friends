@@ -16,12 +16,12 @@ public class ThirdPersonPlayer : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-//            networkView.RPC("Shoot", RPCMode.All, transform.position);
-			Shoot();
+            networkView.RPC("Shoot", RPCMode.All, transform.position);
+//			Shoot();
         }
     }
 	
-
+    [RPC]
     void Shoot()
     {
         Debug.Log("Fire");
@@ -30,24 +30,28 @@ public class ThirdPersonPlayer : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
         {
-            Debug.Log("You shot: " + hit.transform.gameObject.name + " " + teamNo);
-			ThirdPersonPlayer player = (ThirdPersonPlayer)hit.collider.GetComponent(typeof(ThirdPersonPlayer));
-            hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+            Debug.Log("You shot: " + hit.transform.gameObject.name + " " + TeamNo);
+			ThirdPersonPlayer player = (ThirdPersonPlayer)hit.transform.parent.GetComponent(typeof(ThirdPersonPlayer));
+            Debug.Log("Tester team number" + player.TeamNo);
+            if (player.TeamNo != TeamNo)
+            {
+                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+            }
         }
     }
 	
-	[RPC]
-	void playDieSound(Vector3 pos)
-	{
-		AudioSource.PlayClipAtPoint(die, pos);
-	}
+    //[RPC]
+    //void playDieSound(Vector3 pos)
+    //{
+    //    AudioSource.PlayClipAtPoint(die, pos);
+    //}
 	
-
+    [RPC]
     void ApplyDamage(Vector3 pos)
     {
 //        GameObject.Find("Player(Clone)").audio.Play();
- 		networkView.RPC("playDieSound", RPCMode.All, pos);
-//			AudioSource.PlayClipAtPoint(die, pos);
+        //networkView.RPC("playDieSound", RPCMode.All, pos);
+        AudioSource.PlayClipAtPoint(die, pos);
 		
     }
 }
