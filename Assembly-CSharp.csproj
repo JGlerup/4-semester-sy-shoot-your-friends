@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
+	<ProductVersion>9.0.21022</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{F28C38B7-4AEF-2DA6-5ECA-B0944E670427}</ProjectGuid>
+	<ProjectGuid>{AC0F714E-2474-89C8-A2C4-A9FA470351C5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -80,6 +80,7 @@
      <None Include="Assets\Behave\License.txt" />
      <None Include="Assets\Behave\Changelog.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
+     <None Include="Assets\SkeletonData\animations.txt" />
  <Reference Include="Behave.Unity.Assets">
  <HintPath>Assets\Behave\Behave.Unity.Assets.dll</HintPath>
  </Reference>
@@ -95,11 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{03DD2512-AA9B-A082-DF82-09939EC1772D}</Project>
+      <Project>{08BBB3EC-50B0-3F6B-6E24-2C3C8E98F6B5}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{94FDE1BC-B062-3B3F-CDB5-9E1AFBAC62FC}</Project>
+      <Project>{066E8985-51E5-48A3-D07C-3B0826C83549}</Project>
       <Name>Assembly-UnityScript-firstpass</Name>
     </ProjectReference>
   </ItemGroup>

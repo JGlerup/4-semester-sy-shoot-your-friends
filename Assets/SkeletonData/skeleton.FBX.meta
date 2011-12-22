@@ -1,0 +1,191 @@
+fileFormatVersion: 1
+guid: 86c591ebd74142c4d93243d9fa9544da
+ModelImporter:
+  importerVersion: 7
+  meshes:
+    scaleFactor: 0.01
+    useFileUnits: 1
+    meshCompression: 0
+    generateColliders: 0
+    swapUVs: 0
+  tangentSpace:
+    normalImportMode: 0
+    tangentImportMode: 1
+    smoothingAngle: 60
+    splitTangents: 1
+  materials:
+    generation: 1
+  animations:
+    generation: 3
+    bakeAnimations: 0
+    animationCompression: 1
+    animationWrapMode: 0
+    splitAnimations: 1
+    clips:
+      idle:
+        firstFrame: 0
+        lastFrame: 240
+        loop: 0
+        wrapMode: 2
+      run:
+        firstFrame: 241
+        lastFrame: 263
+        loop: 0
+        wrapMode: 2
+      waitingforbattle:
+        firstFrame: 264
+        lastFrame: 314
+        loop: 0
+        wrapMode: 0
+      attack:
+        firstFrame: 315
+        lastFrame: 350
+        loop: 0
+        wrapMode: 0
+      gethit:
+        firstFrame: 351
+        lastFrame: 386
+        loop: 0
+        wrapMode: 0
+      die:
+        firstFrame: 387
+        lastFrame: 457
+        loop: 0
+        wrapMode: 0
+      dance:
+        firstFrame: 458
+        lastFrame: 1275
+        loop: 0
+        wrapMode: 0
+  nodeInfo:
+    R_Forearm:
+    - 100000
+    - 400000
+    R_Shoulder:
+    - 100002
+    - 400002
+    Bip01 L Finger1:
+    - 100004
+    - 400004
+    Bip01 L Finger0:
+    - 100006
+    - 400006
+    L_Hand:
+    - 100008
+    - 400008
+    L_Forearm:
+    - 100010
+    - 400010
+    L_Shoulder:
+    - 100012
+    - 400012
+    Bip01 HeadNub:
+    - 100014
+    - 400014
+    Head:
+    - 100016
+    - 400016
+    Bip01 Neck:
+    - 100018
+    - 400018
+    Chest:
+    - 100020
+    - 400020
+    Bip01 Spine:
+    - 100022
+    - 400022
+    Bip01 Pelvis:
+    - 100024
+    - 400024
+    Bip01:
+    - 100026
+    - 400026
+    skeleton:
+    - 100028
+    - 400028
+    - 13700000
+    Bip01 R Thigh:
+    - 100030
+    - 400030
+    R_Shin:
+    - 100032
+    - 400032
+    Bip01 R Toe0Nub:
+    - 100034
+    - 400034
+    //RootNode:
+    - 100036
+    - 400036
+    - 11100000
+    Bip01 L Foot:
+    - 100038
+    - 400038
+    Bip01 L Toe0:
+    - 100040
+    - 400040
+    Bip01 L Toe0Nub:
+    - 100042
+    - 400042
+    Bip01 R Toe0:
+    - 100044
+    - 400044
+    Bip01 R Foot:
+    - 100046
+    - 400046
+    Bip01 R Finger1:
+    - 100048
+    - 400048
+    Bip01 L Thigh:
+    - 100050
+    - 400050
+    L_Shin:
+    - 100052
+    - 400052
+    Bip01 R Finger0:
+    - 100054
+    - 400054
+    R_Hand:
+    - 100056
+    - 400056
+    Bip01 R Clavicle:
+    - 100058
+    - 400058
+    Bip01 L Finger0Nub:
+    - 100060
+    - 400060
+    Bip01 R Finger01:
+    - 100062
+    - 400062
+    Bip01 L Finger01:
+    - 100064
+    - 400064
+    Bip01 L Clavicle:
+    - 100066
+    - 400066
+    Bip01 R Finger1Nub:
+    - 100068
+    - 400068
+    Bip01 L Finger11:
+    - 100070
+    - 400070
+    Bip01 R Finger0Nub:
+    - 100072
+    - 400072
+    Bip01 L Finger1Nub:
+    - 100074
+    - 400074
+    Bip01 R Finger11:
+    - 100076
+    - 400076
+AssetImporter:
+  importerVersion: 1
+  fileIDToRecycleName:
+    4300000: skeleton
+    7400000: Take 001 //// skeleton
+    7400002: idle //// skeleton
+    7400004: run //// skeleton
+    7400006: waitingforbattle //// skeleton
+    7400008: attack //// skeleton
+    7400010: gethit //// skeleton
+    7400012: die //// skeleton
+    7400014: dance //// skeleton
