@@ -7,11 +7,13 @@ public var walkAnimation : AnimationClip;
 public var runAnimation : AnimationClip;
 public var jumpPoseAnimation : AnimationClip;
 
+
 public var walkMaxAnimationSpeed : float = 0.75;
 public var trotMaxAnimationSpeed : float = 1.0;
 public var runMaxAnimationSpeed : float = 1.0;
 public var jumpAnimationSpeed : float = 1.15;
 public var landAnimationSpeed : float = 1.0;
+
 
 private var _animation : Animation;
 
@@ -22,6 +24,7 @@ enum CharacterState
 	Trotting = 2,
 	Running = 3,
 	Jumping = 4,
+
 }
 
 private var _characterState : CharacterState;
@@ -121,6 +124,7 @@ public var jumpPoseAnimation : AnimationClip;
 		_animation = null;
 		Debug.Log("No jump animation found and the character has canJump enabled. Turning off animations.");
 	}
+	
 			
 }
 
