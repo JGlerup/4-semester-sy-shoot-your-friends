@@ -1,6 +1,0 @@
-fileFormatVersion: 1
-guid: d2d6383990758af4c9d974aec77dff36
-MonoImporter:
-  importerVersion: 1
-  defaultReferences:
-    Enemy: {fileID: 100000, guid: 0e9aaaebfea88a2439111f9ee7eee794, type: 2}
