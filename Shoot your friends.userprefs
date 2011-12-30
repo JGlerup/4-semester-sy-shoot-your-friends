@@ -1,13 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\StartServer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TeamGUI.cs">
     <Files>
-      <File FileName="Assets\Control.cs" Line="1" Column="1" />
-      <File FileName="Assets\AgentTest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" Line="1" Column="1" />
-      <File FileName="Assets\NetworkCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Instantiate.cs" Line="1" Column="1" />
-      <File FileName="Assets\StartServer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TeamGUI.cs" Line="62" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

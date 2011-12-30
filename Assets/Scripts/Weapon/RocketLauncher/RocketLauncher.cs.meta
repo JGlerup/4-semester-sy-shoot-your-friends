@@ -1,8 +1,0 @@
-fileFormatVersion: 1
-guid: 27b81878d07e7cb439d0912f4ef9a898
-MonoImporter:
-  importerVersion: 1
-  defaultReferences:
-    projectile: {fileID: 5400000, guid: 00000000000000000000000000000000, type: 0}
-    rocketLauncherFire: {fileID: 8300000, guid: 848905c3bed92ba46ad80bd1780ef106,
-      type: 1}
