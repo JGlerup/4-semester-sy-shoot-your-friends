@@ -16,7 +16,7 @@ public class ThirdPersonPlayer : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            networkView.RPC("Shoot", RPCMode.All, transform.position);
+            networkView.RPC("Shoot", RPCMode.All, null);
 //			Shoot();
         }
     }
@@ -31,9 +31,8 @@ public class ThirdPersonPlayer : MonoBehaviour
         if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
         {
             Debug.Log("You shot: " + hit.transform.gameObject.name + " " + TeamNo);
-			ThirdPersonPlayer player = (ThirdPersonPlayer)hit.transform.parent.GetComponent(typeof(ThirdPersonPlayer));
-            Debug.Log("Tester team number" + player.TeamNo);
-            if (player.TeamNo != TeamNo)
+			string teamTag = gameObject.tag;
+            if (hit.collider.tag != teamTag)
             {
                 hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
             }
