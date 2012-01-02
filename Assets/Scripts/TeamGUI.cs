@@ -23,33 +23,34 @@ public class TeamGUI : MonoBehaviour {
 
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
-            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
-            int teamNo = 1;
-            networkView.RPC("SetPlayerInfo", RPCMode.All, teamNo);
+            string teamNo = "team1";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
+			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 100, 180, 40), "Team 2"))
         {
-            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
-            int teamNo = 2;
-            networkView.RPC("SetPlayerInfo", RPCMode.All, teamNo);
+            
+            string teamNo = "team2";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
+			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
-            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 2);
-            int teamNo = 3;
-            networkView.RPC("SetPlayerInfo", RPCMode.All, teamNo);
+            string teamNo = "team3";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
+			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
-            Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 2);
-            int teamNo = 4;
-            networkView.RPC("SetPlayerInfo", RPCMode.All, teamNo);
+            string teamNo = "team4";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
+			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
         GUI.EndGroup();
@@ -57,11 +58,10 @@ public class TeamGUI : MonoBehaviour {
     }
 
     [RPC]
-    void SetPlayerInfo(int teamNo)
+    void SetPlayerInfo(string teamNo)
     {
-        ThirdPersonPlayer player = (ThirdPersonPlayer)playerPrefab.gameObject.GetComponent(typeof(ThirdPersonPlayer));
-        player.TeamNo = teamNo;
-    }
+		playerPrefab.tag = teamNo;
+	}
 
     void DisableMenu()
     {
