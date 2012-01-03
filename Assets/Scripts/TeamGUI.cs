@@ -1,19 +1,27 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TeamGUI : MonoBehaviour {
 
-    public Transform playerPrefab;
+    public Transform playerPrefab1;
+	public Transform playerPrefab2;
+	public Transform playerPrefab3;
+	public Transform playerPrefab4;
+	public Transform playerName;
+	IList<GameObject> listOfPlayers = new List<GameObject>();
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
         this.enabled = true ;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+//		GameObject.Find("PlayerName(Clone)").transform.position = playerNamePosition();
 	}
 
     void OnGUI()
@@ -24,8 +32,11 @@ public class TeamGUI : MonoBehaviour {
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
             string teamNo = "team1";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
+			string name = "TesterNytNavn1";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			Network.Instantiate(playerPrefab1, new Vector3(25, 2, 60), transform.rotation, 0);
+			listOfPlayers.Add(GameObject.Find("Player1(Clone)"));
+			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
@@ -33,24 +44,33 @@ public class TeamGUI : MonoBehaviour {
         {
             
             string teamNo = "team2";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
+			string name = "TesterNytNavn2";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			Network.Instantiate(playerPrefab2, new Vector3(25, 2, 60), transform.rotation, 0);
+			listOfPlayers.Add(GameObject.Find("Player2(Clone)"));
+			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
             string teamNo = "team3";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
+			string name = "TesterNytNavn3";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			Network.Instantiate(playerPrefab3, new Vector3(25, 2, 60), transform.rotation, 0);
+			listOfPlayers.Add(GameObject.Find("Player3(Clone)"));
+			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
             string teamNo = "team4";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-			Network.Instantiate(playerPrefab, new Vector3(25, 2, 60), transform.rotation, 0);
+			string name = "TesterNytNavn4";
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			Network.Instantiate(playerPrefab4, new Vector3(25, 2, 60), transform.rotation, 0);
+			listOfPlayers.Add(GameObject.Find("Player4(Clone)"));
+			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
         GUI.EndGroup();
@@ -58,10 +78,36 @@ public class TeamGUI : MonoBehaviour {
     }
 
     [RPC]
-    void SetPlayerInfo(string teamNo)
+    void SetPlayerInfo(string teamNo, string name)
     {
-		playerPrefab.tag = teamNo;
+		TextMesh text = (TextMesh)playerName.gameObject.GetComponent(typeof(TextMesh));
+		text.text = name;
+		
+		if(teamNo.Equals("team1"))
+			playerPrefab1.tag = teamNo;
+		if(teamNo.Equals("team2"))
+			playerPrefab2.tag = teamNo;
+		if(teamNo.Equals("team3"))
+			playerPrefab3.tag = teamNo;
+		if(teamNo.Equals("team4"))
+			playerPrefab4.tag = teamNo;
 	}
+	
+	Vector3 playerNamePosition()
+	{
+		Vector3 v = new Vector3();
+		
+		if(GameObject.Find("Player1(Clone)"))
+			v = GameObject.Find("Player1(Clone)").transform.position + new Vector3(0,1,0);
+		if(GameObject.Find("Player2(Clone)"))
+			v = GameObject.Find("Player2(Clone)").transform.position + new Vector3(0,1,0);
+		if(GameObject.Find("Player3(Clone)"))
+			v = GameObject.Find("Player3(Clone)").transform.position + new Vector3(0,1,0);
+		if(GameObject.Find("Player4(Clone)"))
+			v = GameObject.Find("Player4(Clone)").transform.position + new Vector3(0,1,0);
+		
+		return v;
+	} 
 
     void DisableMenu()
     {
