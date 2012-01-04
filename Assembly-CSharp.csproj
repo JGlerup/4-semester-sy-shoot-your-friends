@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
+	<ProductVersion>9.0.21022</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{F28C38B7-4AEF-2DA6-5ECA-B0944E670427}</ProjectGuid>
+	<ProjectGuid>{F8CFD07B-AD4D-FAF6-ED09-CF4827141F10}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,10 +46,13 @@
   <ItemGroup>
      <Compile Include="Assets\Miscellaneous\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Miscellaneous\Standard Assets\Water (Basic)\Sources\Scripts\WaterSimple.cs" />
+     <Compile Include="Assets\Scripts\CameraFacingBillBoard.cs" />
      <Compile Include="Assets\Scripts\Control.cs" />
      <Compile Include="Assets\Scripts\Instantiate.cs" />
      <Compile Include="Assets\Scripts\MainMenuTest.cs" />
+     <Compile Include="Assets\Scripts\NameMover.cs" />
      <Compile Include="Assets\Scripts\NetworkCamera.cs" />
+     <Compile Include="Assets\Scripts\ObjectLabel.cs" />
      <Compile Include="Assets\Scripts\SetupServer.cs" />
      <Compile Include="Assets\Scripts\StartServer.cs" />
      <Compile Include="Assets\Scripts\TeamGUI.cs" />
