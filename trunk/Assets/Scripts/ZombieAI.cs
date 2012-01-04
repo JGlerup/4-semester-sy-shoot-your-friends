@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum AIState { Chase, Attack, ScanForTarget }
+public enum AIState { Chase, Attack, ScanForTarget}
 
 public class ZombieAI : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class ZombieAI : MonoBehaviour
     public float distance;
     public float reloadTime;
     public float lastShot;
+    //public float attackRange = 2.0f;
     public AnimationClip walkAnimation;
     public AnimationClip attackAnimation;
     private Animation animation;
@@ -61,15 +62,16 @@ public class ZombieAI : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(transform.position, fwd, out hit, 10))
+        if (Physics.Raycast(transform.position, fwd, out hit, 2.0f))
         {
             if (Time.time > reloadTime + lastShot)
             {
-                hit.transform.SendMessageUpwards("ApplyDamage", 5.0f, SendMessageOptions.DontRequireReceiver);
+                hit.transform.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
                 lastShot = Time.time;
                 //transform.renderer.material.color = Color.red;
-                animation[attackAnimation.name].speed = 1.0f;
-                animation.Play();
+                //animation[attackAnimation.name].speed = 1.0f;
+                //Debug.Log(attackAnimation.name);
+                animation.Play(attackAnimation.name);
             }
         }
         else
@@ -83,12 +85,13 @@ public class ZombieAI : MonoBehaviour
     {
         CharacterController cc = (CharacterController)gameObject.GetComponent(typeof(CharacterController));
         distance = Vector3.Distance(target.transform.position, transform.position);
-        if (distance > 10.0f)
+        if (distance > 2)
         {
             LookAtPlayer();
             cc.Move(transform.forward * moveSpeed * Time.deltaTime);
-            animation[walkAnimation.name].speed = 1.0f;
-            animation.Play();
+            //animation[walkAnimation.name].speed = 1.0f;
+            //Debug.Log(walkAnimation.name);
+            animation.Play(walkAnimation.name);
             //transform.renderer.material.color = Color.gray;
         }
         else
@@ -137,6 +140,7 @@ public class ZombieAI : MonoBehaviour
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
+        //transform.LookAt(target);
     }
 }
 
