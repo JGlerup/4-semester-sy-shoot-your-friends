@@ -1,8 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TeamGUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Instantiate.cs">
     <Files>
-      <File FileName="Assets\Scripts\TeamGUI.cs" Line="62" Column="1" />
+      <File FileName="Assets\Scripts\ObjectLabel.cs" Line="76" Column="10" />
+      <File FileName="Assets\Scripts\Control.cs" Line="28" Column="1" />
+      <File FileName="Assets\Scripts\TeamGUI.cs" Line="84" Column="66" />
+      <File FileName="Assets\Scripts\Instantiate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\StartServer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ThirdPersonPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraFacingBillBoard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MainMenuTest.cs" Line="29" Column="40" />
+      <File FileName="Assets\Scripts\SetupServer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\NameMover.cs" Line="20" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

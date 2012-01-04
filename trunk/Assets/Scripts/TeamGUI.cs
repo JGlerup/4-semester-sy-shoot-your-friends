@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class TeamGUI : MonoBehaviour {
+public class TeamGUI : MonoBehaviour 
+{
 
     public Transform playerPrefab1;
 	public Transform playerPrefab2;
@@ -21,7 +22,7 @@ public class TeamGUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-//		GameObject.Find("PlayerName(Clone)").transform.position = playerNamePosition();
+
 	}
 
     void OnGUI()
@@ -92,22 +93,7 @@ public class TeamGUI : MonoBehaviour {
 		if(teamNo.Equals("team4"))
 			playerPrefab4.tag = teamNo;
 	}
-	
-	Vector3 playerNamePosition()
-	{
-		Vector3 v = new Vector3();
-		
-		if(GameObject.Find("Player1(Clone)"))
-			v = GameObject.Find("Player1(Clone)").transform.position + new Vector3(0,1,0);
-		if(GameObject.Find("Player2(Clone)"))
-			v = GameObject.Find("Player2(Clone)").transform.position + new Vector3(0,1,0);
-		if(GameObject.Find("Player3(Clone)"))
-			v = GameObject.Find("Player3(Clone)").transform.position + new Vector3(0,1,0);
-		if(GameObject.Find("Player4(Clone)"))
-			v = GameObject.Find("Player4(Clone)").transform.position + new Vector3(0,1,0);
-		
-		return v;
-	} 
+
 
     void DisableMenu()
     {
