@@ -6,8 +6,11 @@ public class ZombieSpawnManager : MonoBehaviour
 {
     public GameObject zombie1;
     public GameObject zombie2;
+	public GameObject zombiePlayer1;
+	public GameObject zombiePlayer2;
     public GameObject[] spawnLocationList;
     public List<GameObject> zombieList;
+	public List<GameObject> zombiePlayerList;
     private float spawnTime = 0;
     private float respawnTime = 2.0f;
     public int minRespawnTime = 2;
@@ -30,6 +33,9 @@ public class ZombieSpawnManager : MonoBehaviour
         zombieList.Add(zombie1);
         zombieList.Add(zombie2);
         spawnLocationList = GameObject.FindGameObjectsWithTag("ZombieSpawn");
+		zombiePlayerList = new List<GameObject>();
+		zombiePlayerList.Add(zombiePlayer1);
+        zombiePlayerList.Add(zombiePlayer2);
     }
 
     // Update is called once per frame
@@ -49,4 +55,14 @@ public class ZombieSpawnManager : MonoBehaviour
         Network.Instantiate(zombieList[Random.Range(0, zombieList.Count)], position, rotation, 0);
         NumberOfZombies++;
     }
+	
+	[RPC]
+	public void SpawnZombiePlayer()
+	{
+		Transform transform = spawnLocationList[Random.Range(0, spawnLocationList.Length)].transform;
+		if(networkView.isMine)
+		{
+			Network.Instantiate(zombiePlayerList[Random.Range(0, zombiePlayerList.Count)], transform.position, transform.rotation, 0);
+		}
+	}
 }
