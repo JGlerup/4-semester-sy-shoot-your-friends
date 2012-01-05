@@ -90,19 +90,26 @@ public class ZombieAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        CharacterController cc = (CharacterController)gameObject.GetComponent(typeof(CharacterController));
-        distance = Vector3.Distance(target.transform.position, transform.position);
-        if (distance > 2)
-        {
-            LookAtPlayer();
-            cc.Move(transform.forward * moveSpeed * Time.deltaTime);
-            animation.Play(walkAnimation.name);
-			networkView.RPC("GetClosestPlayer", RPCMode.All, null);
-        }
-        else
-        {
-            state = AIState.Attack;
-        }
+		if(target != null)
+		{
+	        CharacterController cc = (CharacterController)gameObject.GetComponent(typeof(CharacterController));
+	        distance = Vector3.Distance(target.transform.position, transform.position);
+	        if (distance > 2)
+	        {
+	            LookAtPlayer();
+	            cc.Move(transform.forward * moveSpeed * Time.deltaTime);
+	            animation.Play(walkAnimation.name);
+				networkView.RPC("GetClosestPlayer", RPCMode.All, null);
+	        }
+	        else
+	        {
+	            state = AIState.Attack;
+	        }
+		}
+		else
+		{
+			state = AIState.ScanForTarget;
+		}
     }
 
     private void ScanForTarget()
@@ -145,8 +152,15 @@ public class ZombieAI : MonoBehaviour
 
     private void LookAtPlayer()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation,
+		if(target != null)
+		{
+        	transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
+		}
+		else
+		{
+			state = AIState.ScanForTarget;
+		}
     }
 	
 	[RPC]
