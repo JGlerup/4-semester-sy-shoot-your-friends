@@ -26,6 +26,7 @@ public class MainMenuTest : MonoBehaviour {
         }
         if (GUILayout.Button("How to Play"))
         {
+			currentGUIMethod = HowToPlayMenu;
             //howToPlay.enabled = true;
             //this.enabled = false;
         }
@@ -112,6 +113,22 @@ public class MainMenuTest : MonoBehaviour {
             GUILayout.EndHorizontal();
         }
     }
+	
+	private void HowToPlayMenu()
+	{
+		float areaWidth = 200;
+        float areaHeight = 200;
+        float ScreenX = ((Screen.width * 0.5f) - (areaWidth * 0.5f));
+        float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
+		GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
+        areaHeight));
+		
+		GUILayout.TextArea("U control the player with WASD or the arrow keys and the mouse. U shoot with mouse button 1. Avoid and kill zombies hvile u kill the enemy players on the other teams.");
+		if(GUILayout.Button("Back to menu"))
+		{
+			currentGUIMethod = MainMenu;
+		}
+	}
 
     // Update is called once per frame 
     public void OnGUI()
