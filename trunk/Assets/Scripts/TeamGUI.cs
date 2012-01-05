@@ -33,13 +33,14 @@ public class TeamGUI : MonoBehaviour
     {
         GUI.BeginGroup(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 250));
         GUI.Box(new Rect(0, 0, 300, 250), "Team Menu");
-		
+		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
 
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
-			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
+			
             string teamNo = "team1";
-			setTextMesh1();
+			networkView.RPC("SetPlayerName", RPCMode.AllBuffered);
+			networkView.RPC("setTextMesh1", RPCMode.AllBuffered);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab1, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player1(Clone)"));
@@ -48,9 +49,9 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 100, 180, 40), "Team 2"))
         {
-            nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
-            string teamNo = "team2";
-			setTextMesh2();
+			string teamNo = "team2";
+			networkView.RPC("SetPlayerName", RPCMode.AllBuffered);
+			networkView.RPC("setTextMesh2", RPCMode.AllBuffered);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab2, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player2(Clone)"));
@@ -59,9 +60,9 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
-			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team3";
-			setTextMesh3();
+			networkView.RPC("SetPlayerName", RPCMode.AllBuffered);
+			networkView.RPC("setTextMesh3", RPCMode.AllBuffered);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab3, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player3(Clone)"));
@@ -70,9 +71,9 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
-			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team4";
-			setTextMesh4();
+			networkView.RPC("SetPlayerName", RPCMode.AllBuffered);
+			networkView.RPC("setTextMesh4", RPCMode.AllBuffered);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab4, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player4(Clone)"));
@@ -94,6 +95,12 @@ public class TeamGUI : MonoBehaviour
 		if(teamNo.Equals("team4"))
 			playerPrefab4.tag = teamNo;
 	}
+	
+	[RPC]
+	void SetPlayerName()
+	{
+		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
+	}
 
 
     void DisableMenu()
@@ -106,21 +113,25 @@ public class TeamGUI : MonoBehaviour
         this.enabled = true;
     }
 	
+	[RPC]
 	void setTextMesh1()
 	{
 		playerName1.GetComponent<TextMesh>().text = nameFromTextField;
 	}
 	
+	[RPC]
 	void setTextMesh2()
 	{
 		playerName2.GetComponent<TextMesh>().text = nameFromTextField;
 	}
 	
+	[RPC]
 	void setTextMesh3()
 	{
 		playerName3.GetComponent<TextMesh>().text = nameFromTextField;
 	}
 	
+	[RPC]
 	void setTextMesh4()
 	{
 		playerName4.GetComponent<TextMesh>().text = nameFromTextField;
