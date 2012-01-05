@@ -20,6 +20,7 @@ public class ZombieAI : MonoBehaviour
 
     public Transform target;
     private AIState state;
+	public Transform smoke;
 	
 	public int maximumHitPoints = 100;
     public int hitPoints = 100;
@@ -80,8 +81,9 @@ public class ZombieAI : MonoBehaviour
         }
         else
         {
-			networkView.RPC("GetClosestPlayer", RPCMode.All, null);
-            state = AIState.Chase;
+//			networkView.RPC("GetClosestPlayer", RPCMode.All, null);
+//            state = AIState.Chase;
+			state = AIState.ScanForTarget;
         }
         LookAtPlayer();
     }
@@ -153,7 +155,7 @@ public class ZombieAI : MonoBehaviour
 		hitPoints -= damage;
         if (hitPoints <= 0)
         {
-//            Die();
+            Die();
         }
         else
         {
@@ -161,5 +163,15 @@ public class ZombieAI : MonoBehaviour
             AudioSource.PlayClipAtPoint(pain, pos);
         }
     }
+	
+	[RPC]
+	void Die()
+	{
+		ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
+		zm.NumberOfZombies--;
+		Network.Instantiate(smoke, transform.position, transform.rotation, 0);
+		Destroy(gameObject);
+		
+	}
 }
 
