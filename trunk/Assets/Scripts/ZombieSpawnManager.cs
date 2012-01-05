@@ -13,7 +13,15 @@ public class ZombieSpawnManager : MonoBehaviour
     public int minRespawnTime = 2;
     public int maxRespawnTime = 10;
     public int maxNumberOfZombies = 50;
-    public int NumberOfZombies { get; set; }
+//    public int NumberOfZombies { get; set; }
+	
+	public int numberOfZombies = 0;
+	
+	public int NumberOfZombies
+	{
+		get { return numberOfZombies; }
+		set { numberOfZombies = value; }
+	}
 
     // Use this for initialization
     private void Start()
