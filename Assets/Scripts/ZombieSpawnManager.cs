@@ -62,7 +62,7 @@ public class ZombieSpawnManager : MonoBehaviour
 		Transform transform = spawnLocationList[Random.Range(0, spawnLocationList.Length)].transform;
 		if(networkView.isMine)
 		{
-			Network.Instantiate(zombiePlayerList[Random.Range(0, zombiePlayerList.Count)], transform.position, transform.rotation, 0);
+			Network.Instantiate(zombiePlayerList[Random.Range(0, zombiePlayerList.Count)], new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation, 0);
 		}
 	}
 }
