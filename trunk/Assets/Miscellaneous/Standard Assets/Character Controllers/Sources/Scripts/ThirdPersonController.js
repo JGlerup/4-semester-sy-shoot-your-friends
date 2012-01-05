@@ -149,7 +149,7 @@ function UpdateSmoothedMovementDirection ()
 			var h = Input.GetAxisRaw("Horizontal");
 		
 		// Are we moving backwards or looking backwards
-		if (v < -0.2)
+		if (h < -0.2)
 			movingBack = true;
 		else
 			movingBack = false;
@@ -369,12 +369,12 @@ function Update()
 		// ANIMATION sector
 		
 		// Set rotation to the move direction
-		if (IsGrounded())
-		{
-			
-			transform.rotation = Quaternion.LookRotation(moveDirection);
-				
-		}	
+//		if (IsGrounded())
+//		{
+//			
+//			transform.rotation = Quaternion.LookRotation(moveDirection);
+//				
+//		}	
 		else
 		{
 			var xzMove = movement;
