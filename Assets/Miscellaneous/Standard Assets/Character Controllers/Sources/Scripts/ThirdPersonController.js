@@ -46,7 +46,7 @@ var gravity = 20.0;
 // The gravity in controlled descent mode
 var speedSmoothing = 10.0;
 var rotateSpeed = 500.0;
-var trotAfterSeconds = 3.0;
+var trotAfterSeconds = 1.0;
 
 var canJump = true;
 
@@ -375,15 +375,15 @@ function Update()
 //			transform.rotation = Quaternion.LookRotation(moveDirection);
 //				
 //		}	
-		else
-		{
-			var xzMove = movement;
-			xzMove.y = 0;
-			if (xzMove.sqrMagnitude > 0.001)
-			{
-				transform.rotation = Quaternion.LookRotation(xzMove);
-			}
-		}	
+//		else
+//		{
+//			var xzMove = movement;
+//			xzMove.y = 0;
+//			if (xzMove.sqrMagnitude > 0.001)
+//			{
+//				transform.rotation = Quaternion.LookRotation(xzMove);
+//			}
+//		}	
 		
 		// We are in jump mode but just became grounded
 		if (IsGrounded())
