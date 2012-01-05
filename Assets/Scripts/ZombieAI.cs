@@ -73,7 +73,7 @@ public class ZombieAI : MonoBehaviour
         {
             if (Time.time > reloadTime + lastShot)
             {
-                hit.transform.SendMessageUpwards("ApplyDamage", hit.transform.position, damage, SendMessageOptions.DontRequireReceiver);
+                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
                 lastShot = Time.time;
                 animation.Play(attackAnimation.name);
             }
@@ -145,16 +145,15 @@ public class ZombieAI : MonoBehaviour
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
-        //transform.LookAt(target);
     }
 	
 	[RPC]
-    void ApplyDamage(Vector3 pos, int damage)
+    void ApplyDamage(Vector3 pos)
     {
 		hitPoints -= damage;
         if (hitPoints <= 0)
         {
-            Die();
+//            Die();
         }
         else
         {

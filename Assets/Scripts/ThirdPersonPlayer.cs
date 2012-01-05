@@ -41,7 +41,7 @@ public class ThirdPersonPlayer : MonoBehaviour
 			string teamTag = gameObject.tag;
             if (hit.collider.tag != teamTag)
             {
-                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, damage, SendMessageOptions.DontRequireReceiver);
+                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
             }
         }
     }
@@ -53,7 +53,7 @@ public class ThirdPersonPlayer : MonoBehaviour
     //}
 	
     [RPC]
-    void ApplyDamage(Vector3 pos, int damage)
+    void ApplyDamage(Vector3 pos)
     {
 		hitPoints -= damage;
         if (hitPoints <= 0)
