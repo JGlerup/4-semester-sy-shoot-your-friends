@@ -16,9 +16,16 @@ public class ZombieAI : MonoBehaviour
     public AnimationClip walkAnimation;
     public AnimationClip attackAnimation;
     private Animation animation;
+	public int damage = 2;
 
-    private Transform target;
+    public Transform target;
     private AIState state;
+	
+	public int maximumHitPoints = 100;
+    public int hitPoints = 100;
+	
+	public AudioClip die;
+	public AudioClip pain;
 
     // Use this for initialization
     private void Start()
@@ -62,20 +69,18 @@ public class ZombieAI : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(transform.position, fwd, out hit, 2.0f))
+        if (Physics.Raycast(transform.position, fwd, out hit, 2.0f) && target != null)
         {
             if (Time.time > reloadTime + lastShot)
             {
-                hit.transform.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+                hit.transform.SendMessageUpwards("ApplyDamage", hit.transform.position, damage, SendMessageOptions.DontRequireReceiver);
                 lastShot = Time.time;
-                //transform.renderer.material.color = Color.red;
-                //animation[attackAnimation.name].speed = 1.0f;
-                //Debug.Log(attackAnimation.name);
                 animation.Play(attackAnimation.name);
             }
         }
         else
         {
+			networkView.RPC("GetClosestPlayer", RPCMode.All, null);
             state = AIState.Chase;
         }
         LookAtPlayer();
@@ -89,10 +94,8 @@ public class ZombieAI : MonoBehaviour
         {
             LookAtPlayer();
             cc.Move(transform.forward * moveSpeed * Time.deltaTime);
-            //animation[walkAnimation.name].speed = 1.0f;
-            //Debug.Log(walkAnimation.name);
             animation.Play(walkAnimation.name);
-            //transform.renderer.material.color = Color.gray;
+			networkView.RPC("GetClosestPlayer", RPCMode.All, null);
         }
         else
         {
@@ -102,7 +105,7 @@ public class ZombieAI : MonoBehaviour
 
     private void ScanForTarget()
     {
-        target = GetClosestPlayer();
+        networkView.RPC("GetClosestPlayer", RPCMode.All, null);
         if (target == null)
         {
             state = AIState.ScanForTarget;
@@ -112,8 +115,9 @@ public class ZombieAI : MonoBehaviour
             state = AIState.Chase;
         }
     }
-
-    private Transform GetClosestPlayer()
+	
+	[RPC]
+    private void GetClosestPlayer()
     {
         List<GameObject> listOfPlayer = new List<GameObject>();
         listOfPlayer.AddRange(GameObject.FindGameObjectsWithTag("team1"));
@@ -133,7 +137,8 @@ public class ZombieAI : MonoBehaviour
                 minDist = dist;
             }
         }
-        return tMin;
+		target = tMin;
+//        return tMin;
     }
 
     private void LookAtPlayer()
@@ -141,6 +146,21 @@ public class ZombieAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
         //transform.LookAt(target);
+    }
+	
+	[RPC]
+    void ApplyDamage(Vector3 pos, int damage)
+    {
+		hitPoints -= damage;
+        if (hitPoints <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            Debug.Log(hitPoints.ToString());
+            AudioSource.PlayClipAtPoint(pain, pos);
+        }
     }
 }
 

@@ -3,8 +3,15 @@ using System.Collections;
 
 public class ThirdPersonPlayer : MonoBehaviour
 {
-    public AudioClip die;
     public int TeamNo {get; set;}
+	
+	public int maximumHitPoints = 100;
+    public int hitPoints = 100;
+	public int damage = 5;
+	
+	public AudioClip die;
+	public AudioClip pain;
+	
     // Use this for initialization
     void Start()
     {		
@@ -34,7 +41,7 @@ public class ThirdPersonPlayer : MonoBehaviour
 			string teamTag = gameObject.tag;
             if (hit.collider.tag != teamTag)
             {
-                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, damage, SendMessageOptions.DontRequireReceiver);
             }
         }
     }
@@ -46,11 +53,17 @@ public class ThirdPersonPlayer : MonoBehaviour
     //}
 	
     [RPC]
-    void ApplyDamage(Vector3 pos)
+    void ApplyDamage(Vector3 pos, int damage)
     {
-//        GameObject.Find("Player(Clone)").audio.Play();
-        //networkView.RPC("playDieSound", RPCMode.All, pos);
-        AudioSource.PlayClipAtPoint(die, pos);
-		
+		hitPoints -= damage;
+        if (hitPoints <= 0)
+        {
+//            Die();
+        }
+        else
+        {
+            Debug.Log(hitPoints.ToString());
+            AudioSource.PlayClipAtPoint(pain, pos);
+        }
     }
 }
