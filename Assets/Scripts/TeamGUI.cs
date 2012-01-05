@@ -10,7 +10,11 @@ public class TeamGUI : MonoBehaviour
 	public Transform playerPrefab2;
 	public Transform playerPrefab3;
 	public Transform playerPrefab4;
-	public Transform playerName;
+	public Transform playerName1;
+	public Transform playerName2;
+	public Transform playerName3;
+	public Transform playerName4;
+	public string nameFromTextField;
 	IList<GameObject> listOfPlayers = new List<GameObject>();
 
 	// Use this for initialization
@@ -22,22 +26,22 @@ public class TeamGUI : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
+		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
 	}
 
     void OnGUI()
     {
         GUI.BeginGroup(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 250));
         GUI.Box(new Rect(0, 0, 300, 250), "Team Menu");
+		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
 
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
             string teamNo = "team1";
-			string name = "TesterNytNavn1";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			setTextMesh1();
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab1, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player1(Clone)"));
-			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
@@ -45,33 +49,30 @@ public class TeamGUI : MonoBehaviour
         {
             
             string teamNo = "team2";
-			string name = "TesterNytNavn2";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			setTextMesh2();
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab2, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player2(Clone)"));
-			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
             string teamNo = "team3";
-			string name = "TesterNytNavn3";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			setTextMesh3();
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab3, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player3(Clone)"));
-			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
 
         if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
             string teamNo = "team4";
-			string name = "TesterNytNavn4";
-            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo, name);
+			setTextMesh4();
+            networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
 			Network.Instantiate(playerPrefab4, new Vector3(25, 2, 60), transform.rotation, 0);
 			listOfPlayers.Add(GameObject.Find("Player4(Clone)"));
-			Network.Instantiate(playerName, new Vector3(25, 2, 60), transform.rotation, 0);
             DisableMenu();
         }
         GUI.EndGroup();
@@ -79,11 +80,8 @@ public class TeamGUI : MonoBehaviour
     }
 
     [RPC]
-    void SetPlayerInfo(string teamNo, string name)
-    {
-		TextMesh text = (TextMesh)playerName.gameObject.GetComponent(typeof(TextMesh));
-		text.text = name;
-		
+    void SetPlayerInfo(string teamNo)
+    {		
 		if(teamNo.Equals("team1"))
 			playerPrefab1.tag = teamNo;
 		if(teamNo.Equals("team2"))
@@ -104,4 +102,24 @@ public class TeamGUI : MonoBehaviour
     {
         this.enabled = true;
     }
+	
+	void setTextMesh1()
+	{
+		playerName1.GetComponent<TextMesh>().text = nameFromTextField;
+	}
+	
+	void setTextMesh2()
+	{
+		playerName2.GetComponent<TextMesh>().text = nameFromTextField;
+	}
+	
+	void setTextMesh3()
+	{
+		playerName3.GetComponent<TextMesh>().text = nameFromTextField;
+	}
+	
+	void setTextMesh4()
+	{
+		playerName4.GetComponent<TextMesh>().text = nameFromTextField;
+	}
 }
