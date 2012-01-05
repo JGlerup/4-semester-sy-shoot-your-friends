@@ -26,17 +26,18 @@ public class TeamGUI : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
+		
 	}
 
     void OnGUI()
     {
         GUI.BeginGroup(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 250));
         GUI.Box(new Rect(0, 0, 300, 250), "Team Menu");
-		nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
+		
 
         if (GUI.Button(new Rect(55, 50, 180, 40), "Team 1"))
         {
+			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team1";
 			setTextMesh1();
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
@@ -47,7 +48,7 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 100, 180, 40), "Team 2"))
         {
-            
+            nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team2";
 			setTextMesh2();
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
@@ -58,6 +59,7 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 150, 180, 40), "Team 3"))
         {
+			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team3";
 			setTextMesh3();
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
@@ -68,6 +70,7 @@ public class TeamGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(55, 200, 180, 40), "Team 4"))
         {
+			nameFromTextField = GUI.TextField(new Rect(55, 10, 100, 20), nameFromTextField, 25);
             string teamNo = "team4";
 			setTextMesh4();
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
