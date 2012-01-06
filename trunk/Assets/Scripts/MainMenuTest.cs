@@ -136,8 +136,9 @@ public class MainMenuTest : MonoBehaviour
             + "--------Goal-------- \n"
             + "When you join a team, you spawn in a house as a skeleton. All skeletons have a name above their heads. Each team looks alike. There is no friendly fire. \n"
             + "Defeat all other teams, and avoid getting killed by zombies (Spartan king and construction worker) to win. \n"
-            + "When you die, you become a zombie and you can attack all teams but not zombies. \n"
-            + "If you die as a zombie, you’ll respawn as a zombie."
+            + "The winning team will perform a dance \n"
+			+ "When you die, you become a zombie and you can attack all teams but not zombies. \n"
+            + "If you die as a zombie, you’'ll respawn as a zombie."
             + "\n";
 
         GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
