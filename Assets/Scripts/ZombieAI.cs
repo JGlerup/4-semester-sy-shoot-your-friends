@@ -184,7 +184,7 @@ public class ZombieAI : MonoBehaviour
 		ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
 		zm.NumberOfZombies--;
 		Network.Instantiate(smoke, transform.position, transform.rotation, 0);
-		Destroy(gameObject);
+		Network.Destroy(gameObject);
 		
 	}
 }
