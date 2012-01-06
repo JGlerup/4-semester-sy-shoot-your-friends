@@ -5,7 +5,8 @@ public class ThirdPersonPlayer : MonoBehaviour
 {
     public int TeamNo {get; set;}
 	public int check = 0;
-	
+
+    private HUD hud;
 	public int maximumHitPoints = 100;
     public int hitPoints = 100;
 	public int damage = 5;
@@ -18,6 +19,13 @@ public class ThirdPersonPlayer : MonoBehaviour
     void Start()
     {		
     	Debug.Log(TeamNo);
+        GameObject go = GameObject.Find("GUI");
+        hud = (HUD)go.GetComponent(typeof(HUD));
+        if (networkView.isMine)
+        {
+            hud.enabled = true;
+            hud.UpdateGUIHealth(hitPoints);
+        }
     }
 
     // Update is called once per frame
@@ -77,6 +85,10 @@ public class ThirdPersonPlayer : MonoBehaviour
 			check += 1;
 			if(check == 1)
 			{
+                if (networkView.isMine)
+                {
+                    hud.UpdateGUIHealth(0);
+                }
 				Die();
 			}//end if
             
@@ -85,6 +97,10 @@ public class ThirdPersonPlayer : MonoBehaviour
         {
             Debug.Log(hitPoints.ToString());
             AudioSource.PlayClipAtPoint(pain, pos);
+            if (networkView.isMine)
+            {
+                hud.UpdateGUIHealth(hitPoints);
+            }
         }//end else
     }
 
