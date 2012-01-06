@@ -66,13 +66,16 @@ public class ThirdPersonPlayer : MonoBehaviour
             AudioSource.PlayClipAtPoint(pain, pos);
         }
     }
-	
-	[RPC]
+
 	void Die()
 	{
-		ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
-		zm.SpawnZombiePlayer();
-		AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
-		Destroy(gameObject);
+		if(networkView.isMine)
+		{
+			ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
+			zm.SpawnZombiePlayer();
+			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
+			Network.Destroy(gameObject);
+		}
+		
 	}
 }
