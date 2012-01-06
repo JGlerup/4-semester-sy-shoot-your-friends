@@ -19,14 +19,27 @@ public class ThirdPersonPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButton("Fire1"))
-        {
-            networkView.RPC("Shoot", RPCMode.All, null);
+	void Update ()
+	{
+		GameObject go = GameObject.Find ("GUI");
+		MouseLook ml = GetComponent<MouseLook> ();
+		InGameMenu inGameMenu = (InGameMenu)go.GetComponent (typeof(InGameMenu));
+		if (Input.GetKey (KeyCode.Escape)) {
+			
+			
+			inGameMenu.enabled = true;
+		}
+		if (Input.GetButton ("Fire1")) {
+			networkView.RPC ("Shoot", RPCMode.All, null);
 //			Shoot();
-        }
-    }
+		}
+		
+		if (inGameMenu.enabled) {
+			
+			ml.enabled = false;
+		}
+		ml.enabled = true;
+	}
 	
     [RPC]
     void Shoot()
