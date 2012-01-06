@@ -16,11 +16,19 @@ public class TeamGUI : MonoBehaviour
     public Transform playerName4;
     public string nameFromTextField;
     IList<GameObject> listOfPlayers = new List<GameObject>();
+    IList<GameObject> Team1SpawnLocationList = new List<GameObject>();
+    IList<GameObject> Team2SpawnLocationList = new List<GameObject>();
+    IList<GameObject> Team3SpawnLocationList = new List<GameObject>();
+    IList<GameObject> Team4SpawnLocationList = new List<GameObject>();
 
     // Use this for initialization
     void Start()
     {
         this.enabled = true;
+        Team1SpawnLocationList = GameObject.FindGameObjectsWithTag("Team1Spawn");
+        Team2SpawnLocationList = GameObject.FindGameObjectsWithTag("Team2Spawn");
+        Team3SpawnLocationList = GameObject.FindGameObjectsWithTag("Team3Spawn");
+        Team4SpawnLocationList = GameObject.FindGameObjectsWithTag("Team4Spawn");
     }
 
     // Update is called once per frame
@@ -42,7 +50,8 @@ public class TeamGUI : MonoBehaviour
             SetPlayerName();
             networkView.RPC("setTextMesh1", RPCMode.AllBuffered, nameFromTextField);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-            Network.Instantiate(playerPrefab1, new Vector3(25, 2, 60), transform.rotation, 0);
+            //Network.Instantiate(playerPrefab1, new Vector3(25, 2, 60), transform.rotation, 0);
+            Network.Instantiate(playerPrefab1, Team1SpawnLocationList[Random.Range(0, Team1SpawnLocationList.Count)].transform.position, transform.rotation, 0);
             listOfPlayers.Add(GameObject.Find("Player1(Clone)"));
             DisableMenu();
         }
@@ -53,7 +62,7 @@ public class TeamGUI : MonoBehaviour
             SetPlayerName();
             networkView.RPC("setTextMesh2", RPCMode.AllBuffered, nameFromTextField);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-            Network.Instantiate(playerPrefab2, new Vector3(25, 2, 60), transform.rotation, 0);
+            Network.Instantiate(playerPrefab2, Team2SpawnLocationList[Random.Range(0, Team2SpawnLocationList.Count)].transform.position, transform.rotation, 0);
             listOfPlayers.Add(GameObject.Find("Player2(Clone)"));
             DisableMenu();
         }
@@ -64,7 +73,7 @@ public class TeamGUI : MonoBehaviour
             SetPlayerName();
             networkView.RPC("setTextMesh3", RPCMode.AllBuffered, nameFromTextField);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-            Network.Instantiate(playerPrefab3, new Vector3(25, 2, 60), transform.rotation, 0);
+            Network.Instantiate(playerPrefab3, Team3SpawnLocationList[Random.Range(0, Team3SpawnLocationList.Count)].transform.position, transform.rotation, 0);
             listOfPlayers.Add(GameObject.Find("Player3(Clone)"));
             DisableMenu();
         }
@@ -75,7 +84,7 @@ public class TeamGUI : MonoBehaviour
             SetPlayerName();
             networkView.RPC("setTextMesh4", RPCMode.AllBuffered, nameFromTextField);
             networkView.RPC("SetPlayerInfo", RPCMode.AllBuffered, teamNo);
-            Network.Instantiate(playerPrefab4, new Vector3(25, 2, 60), transform.rotation, 0);
+            Network.Instantiate(playerPrefab4, Team4SpawnLocationList[Random.Range(0, Team4SpawnLocationList.Count)].transform.position, transform.rotation, 0);
             listOfPlayers.Add(GameObject.Find("Player4(Clone)"));
             DisableMenu();
         }
@@ -134,5 +143,11 @@ public class TeamGUI : MonoBehaviour
     void setTextMesh4(string name)
     {
         playerName4.GetComponent<TextMesh>().text = name;
+    }
+
+    void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        Network.RemoveRPCs(player, 0);
+        Network.DestroyPlayerObjects(player);
     }
 }

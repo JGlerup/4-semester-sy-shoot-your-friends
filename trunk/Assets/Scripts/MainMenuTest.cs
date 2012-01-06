@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class MainMenuTest : MonoBehaviour {
+public class MainMenuTest : MonoBehaviour
+{
     private delegate void GUIMethod();
     private GUIMethod currentGUIMethod;
 
@@ -26,7 +27,7 @@ public class MainMenuTest : MonoBehaviour {
         }
         if (GUILayout.Button("How to Play"))
         {
-			currentGUIMethod = HowToPlayMenu;
+            currentGUIMethod = HowToPlayMenu;
             //howToPlay.enabled = true;
             //this.enabled = false;
         }
@@ -113,26 +114,46 @@ public class MainMenuTest : MonoBehaviour {
             GUILayout.EndHorizontal();
         }
     }
-	
-	private void HowToPlayMenu()
-	{
-		float areaWidth = 200;
-        float areaHeight = 200;
+
+    private void HowToPlayMenu()
+    {
+        float areaWidth = 400;
+        float areaHeight = 400;
         float ScreenX = ((Screen.width * 0.5f) - (areaWidth * 0.5f));
         float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
-		GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
+
+        string text = "------Controls------ \n"
+            + "Movement: WASD or arrow keys and mouse \n"
+            + "Shooting: Mouse button 1 (left-mouse button) \n"
+            + "Jumping: Space \n"
+            + "Running: Hold shift while moving \n"
+            + "In-game menu: Escape \n"
+            + "\n"
+            + "--------Server-------- \n"
+            + "Join: Multiplayer->Join server-> Connect to a server from the list->Name your player->Choose team \n"
+            + "Create: Multiplayer->Create Server->Create Server->Name your player-> Choose team \n"
+            + "\n"
+            + "--------Goal-------- \n"
+            + "When you join a team, you spawn in a house as a skeleton. All skeletons have a name above their heads. Each team looks alike. There is no friendly fire. \n"
+            + "Defeat all other teams, and avoid getting killed by zombies (Spartan king and construction worker) to win. \n"
+            + "When you die, you become a zombie and you can attack all teams but not zombies. \n"
+            + "If you die as a zombie, you’ll respawn as a zombie."
+            + "\n";
+
+        GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
         areaHeight));
-		
-		GUILayout.TextArea("U control the player with WASD or the arrow keys and the mouse. U shoot with mouse button 1. Avoid and kill zombies hvile u kill the enemy players on the other teams.");
-		if(GUILayout.Button("Back to menu"))
-		{
-			currentGUIMethod = MainMenu;
-		}
-	}
+
+        GUILayout.TextArea(text);
+        if (GUILayout.Button("Back to menu"))
+        {
+            currentGUIMethod = MainMenu;
+        }
+        GUILayout.EndArea();
+    }
 
     // Update is called once per frame 
     public void OnGUI()
     {
         this.currentGUIMethod();
-    } 
+    }
 }
