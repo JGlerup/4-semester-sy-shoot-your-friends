@@ -25,7 +25,9 @@ public class InGameMenu : MonoBehaviour
 		float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
 		GUILayout.BeginArea (new Rect (ScreenX, ScreenY, areaWidth, areaHeight));
 		
-		if (GUILayout.Button ("Resume")) {
+		if (GUILayout.Button ("Resume")) 
+		{
+			Screen.lockCursor = true;
 			this.enabled = false;
 		}
 		GUILayout.EndArea();

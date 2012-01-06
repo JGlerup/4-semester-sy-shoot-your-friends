@@ -15,7 +15,7 @@ public class ThirdPersonPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {		
-       Debug.Log(TeamNo);
+    	Debug.Log(TeamNo);
     }
 
     // Update is called once per frame
@@ -24,18 +24,18 @@ public class ThirdPersonPlayer : MonoBehaviour
 		GameObject go = GameObject.Find ("GUI");
 		MouseLook ml = GetComponent<MouseLook> ();
 		InGameMenu inGameMenu = (InGameMenu)go.GetComponent (typeof(InGameMenu));
-		if (Input.GetKey (KeyCode.Escape)) {
-			
-			
+		if (Input.GetKey (KeyCode.Escape)) 
+		{
 			inGameMenu.enabled = true;
+			Screen.lockCursor = false;
 		}
-		if (Input.GetButton ("Fire1")) {
+		if (Input.GetButton ("Fire1")) 
+		{
 			networkView.RPC ("Shoot", RPCMode.All, null);
-//			Shoot();
 		}
 		
-		if (inGameMenu.enabled) {
-			
+		if (inGameMenu.enabled) 
+		{	
 			ml.enabled = false;
 		}
 		ml.enabled = true;
