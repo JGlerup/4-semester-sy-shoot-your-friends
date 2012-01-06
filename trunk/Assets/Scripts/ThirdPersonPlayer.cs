@@ -4,6 +4,7 @@ using System.Collections;
 public class ThirdPersonPlayer : MonoBehaviour
 {
     public int TeamNo {get; set;}
+	public int check = 0;
 	
 	public int maximumHitPoints = 100;
     public int hitPoints = 100;
@@ -11,6 +12,7 @@ public class ThirdPersonPlayer : MonoBehaviour
 	
 	public AudioClip die;
 	public AudioClip pain;
+	public Transform smoke;
 	
     // Use this for initialization
     void Start()
@@ -68,16 +70,22 @@ public class ThirdPersonPlayer : MonoBehaviour
     [RPC]
     void ApplyDamage(Vector3 pos)
     {
+		
 		hitPoints -= damage;
         if (hitPoints <= 0)
         {
-            Die();
-        }
+			check += 1;
+			if(check == 1)
+			{
+				Die();
+			}//end if
+            
+        }//end if
         else
         {
             Debug.Log(hitPoints.ToString());
             AudioSource.PlayClipAtPoint(pain, pos);
-        }
+        }//end else
     }
 
 	void Die()
@@ -87,8 +95,9 @@ public class ThirdPersonPlayer : MonoBehaviour
 			ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
 			zm.SpawnZombiePlayer();
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
+			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
 			Network.Destroy(gameObject);
-		}
+		}//end if
 		
 	}
 }
