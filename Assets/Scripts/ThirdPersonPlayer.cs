@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ThirdPersonPlayer : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class ThirdPersonPlayer : MonoBehaviour
 	public AudioClip die;
 	public AudioClip pain;
 	public Transform smoke;
+	
+	IList<GameObject> team1List = new List<GameObject>();
+	IList<GameObject> team2List = new List<GameObject>();
+	IList<GameObject> team3List = new List<GameObject>();
+	IList<GameObject> team4List = new List<GameObject>();
 	
     // Use this for initialization
     void Start()
@@ -113,7 +119,42 @@ public class ThirdPersonPlayer : MonoBehaviour
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
 			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
 			Network.Destroy(gameObject);
+			CheckTeams();
 		}//end if
+		
+	}
+	
+	[RPC]
+	void CheckTeams()
+	{
+		team1List = GameObject.FindGameObjectsWithTag("team1");
+		team2List = GameObject.FindGameObjectsWithTag("team2");
+		team3List = GameObject.FindGameObjectsWithTag("team3");
+		team4List = GameObject.FindGameObjectsWithTag("team4");
+		
+		if(team1List.Count == 0 && team2List.Count == 0 && team3List.Count == 0)
+		{
+			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
+			guiWin.winningTeamNumber = 4;
+		}
+		
+		if(team2List.Count == 0 && team3List.Count == 0 && team4List.Count == 0)
+		{
+			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
+			guiWin.winningTeamNumber = 1;
+		}
+		
+		if(team1List.Count == 0 && team3List.Count == 0 && team4List.Count == 0)
+		{
+			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
+			guiWin.winningTeamNumber = 2;
+		}
+		
+		if(team1List.Count == 0 && team2List.Count == 0 && team4List.Count == 0)
+		{
+			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
+			guiWin.winningTeamNumber = 3;
+		}
 		
 	}
 }
