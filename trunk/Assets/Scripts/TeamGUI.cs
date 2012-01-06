@@ -113,6 +113,7 @@ public class TeamGUI : MonoBehaviour
 
     void DisableMenu()
     {
+		Screen.lockCursor = true;
         this.enabled = false;
     }
 
