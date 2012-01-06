@@ -15,7 +15,7 @@ public class MainMenuTest : MonoBehaviour
     public void MainMenu()
     {
         float areaWidth = 200;
-        float areaHeight = 230;
+        float areaHeight = 200;
         float ScreenX = ((Screen.width * 0.5f) - (areaWidth * 0.5f));
         float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
         GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
