@@ -138,7 +138,7 @@ public class MainMenuTest : MonoBehaviour
             + "Defeat all other teams, and avoid getting killed by zombies (Spartan king and construction worker) to win. \n"
             + "The winning team will perform a dance \n"
 			+ "When you die, you become a zombie and you can attack all teams but not zombies. \n"
-            + "If you die as a zombie, you’'ll respawn as a zombie."
+            + "If you die as a zombie, you’ will respawn as a zombie."
             + "\n";
 
         GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
