@@ -10,7 +10,7 @@ public class ThirdPersonPlayer : MonoBehaviour
     private HUD hud;
 	public int maximumHitPoints = 100;
     public int hitPoints = 100;
-	public int damage = 5;
+    //public int damage = 5;
 	
 	public AudioClip die;
 	public AudioClip pain;
@@ -45,10 +45,10 @@ public class ThirdPersonPlayer : MonoBehaviour
 			inGameMenu.enabled = true;
 			Screen.lockCursor = false;
 		}
-		if (Input.GetButton ("Fire1")) 
-		{
-			networkView.RPC ("Shoot", RPCMode.All, null);
-		}
+        //if (Input.GetButton ("Fire1")) 
+        //{
+        //    networkView.RPC ("Shoot", RPCMode.All, null);
+        //}
 		
 		if (inGameMenu.enabled) 
 		{	
@@ -57,52 +57,52 @@ public class ThirdPersonPlayer : MonoBehaviour
 		ml.enabled = true;
 	}
 	
-    [RPC]
-    void Shoot()
-    {
-        Debug.Log("Fire");
-        Vector3 direction = transform.TransformDirection(Vector3.forward);
-        RaycastHit hit;
+    //[RPC]
+    //void Shoot()
+    //{
+    //    Debug.Log("Fire");
+    //    Vector3 direction = transform.TransformDirection(Vector3.forward);
+    //    RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
-        {
-            Debug.Log("You shot: " + hit.transform.gameObject.name + " " + TeamNo);
-			string teamTag = gameObject.tag;
-            if (hit.collider.tag != teamTag)
-            {
-                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
-            }
-        }
-    }
+    //    if (Physics.Raycast(transform.position, direction, out hit, 100.0f))
+    //    {
+    //        Debug.Log("You shot: " + hit.transform.gameObject.name + " " + TeamNo);
+    //        string teamTag = gameObject.tag;
+    //        if (hit.collider.tag != teamTag)
+    //        {
+    //            hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+    //        }
+    //    }
+    //}
 	
     //[RPC]
     //void playDieSound(Vector3 pos)
     //{
     //    AudioSource.PlayClipAtPoint(die, pos);
     //}
-	
+
     [RPC]
-    void ApplyDamage(Vector3 pos)
+    void ApplyDamage(int damage)
     {
-		
-		hitPoints -= damage;
+
+        hitPoints -= damage;
         if (hitPoints <= 0)
         {
-			check += 1;
-			if(check == 1)
-			{
+            check += 1;
+            if (check == 1)
+            {
                 if (networkView.isMine)
                 {
                     hud.UpdateGUIHealth(0);
                 }
-				Die();
-			}//end if
-            
+                Die();
+            }//end if
+
         }//end if
         else
         {
             Debug.Log(hitPoints.ToString());
-            AudioSource.PlayClipAtPoint(pain, pos);
+            AudioSource.PlayClipAtPoint(pain, transform.position);
             if (networkView.isMine)
             {
                 hud.UpdateGUIHealth(hitPoints);
