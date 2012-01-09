@@ -11,10 +11,10 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         // start with the main menu GUI
-        this.currentGUIMethod = MainMenu;
+        this.currentGUIMethod = MainMenuCreate;
     }
 
-    public void MainMenu()
+    public void MainMenuCreate()
     {
         float areaWidth = 200;
         float areaHeight = 200;
@@ -60,7 +60,7 @@ public class MainMenu : MonoBehaviour
         }
         if (GUILayout.Button("Exit"))
         {
-            this.currentGUIMethod = MainMenu;
+            this.currentGUIMethod = MainMenuCreate;
         }
         GUILayout.EndArea();
     }
@@ -153,7 +153,7 @@ public class MainMenu : MonoBehaviour
         GUILayout.TextArea(text);
         if (GUILayout.Button("Back to menu"))
         {
-            currentGUIMethod = MainMenu;
+            currentGUIMethod = MainMenuCreate;
         }
         GUILayout.EndArea();
     }
