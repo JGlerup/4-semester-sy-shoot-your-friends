@@ -14,7 +14,7 @@ public class ZombieSpawnManager : MonoBehaviour
     private float spawnTime = 0;
     private float respawnTime = 2.0f;
     public int minRespawnTime = 2;
-    public int maxRespawnTime = 10;
+    public int maxRespawnTime = 4;
     public int maxNumberOfZombies = 50;
 //    public int NumberOfZombies { get; set; }
 	
