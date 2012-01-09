@@ -119,8 +119,9 @@ public class ThirdPersonPlayer : MonoBehaviour
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
 			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
 			Network.Destroy(gameObject);
+			networkView.RPC("CheckTeams", RPCMode.All, null);
 		}//end if
-		CheckTeams();
+		
 		
 	}
 	
@@ -134,24 +135,28 @@ public class ThirdPersonPlayer : MonoBehaviour
 		
 		if(team1List.Count == 0 && team2List.Count == 0 && team3List.Count == 0)
 		{
+			Debug.Log("Checked team4 win");
 			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
 			guiWin.winningTeamNumber = 4;
 		}
 		
 		if(team2List.Count == 0 && team3List.Count == 0 && team4List.Count == 0)
 		{
+			Debug.Log("Checked team1 win");
 			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
 			guiWin.winningTeamNumber = 1;
 		}
 		
 		if(team1List.Count == 0 && team3List.Count == 0 && team4List.Count == 0)
 		{
+			Debug.Log("Checked team2 win");
 			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
 			guiWin.winningTeamNumber = 2;
 		}
 		
 		if(team1List.Count == 0 && team2List.Count == 0 && team4List.Count == 0)
 		{
+			Debug.Log("Checked team3 win");
 			Win guiWin = (Win)GameObject.Find("GUI").GetComponent(typeof(Win));
 			guiWin.winningTeamNumber = 3;
 		}
