@@ -9,11 +9,11 @@ public class SetupServer : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void LaunchServer(int connections, int listenPort)
+    public void LaunchServer(int connections, int listenPort, string serverName, string serverDescription)
     {
         bool useNat = !Network.HavePublicAddress();
         Network.InitializeServer(connections, listenPort, useNat);
-        MasterServer.RegisterHost("ShootYourFriends", "JohnDoes game", "l33t game for all");
+        MasterServer.RegisterHost("ShootYourFriends", serverName, serverDescription);
         Debug.Log("Server created " + MasterServer.ipAddress);
         Application.LoadLevel("City1");
         StartCoroutine(SetupNetworkObjects(2.0F));

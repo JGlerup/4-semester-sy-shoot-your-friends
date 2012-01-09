@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MainMenuTest : MonoBehaviour
 {
+	public string serverName = "";
+	public string serverDescription = "";
     private delegate void GUIMethod();
     private GUIMethod currentGUIMethod;
 
@@ -71,11 +73,15 @@ public class MainMenuTest : MonoBehaviour
         float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
         GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
         areaHeight));
-
+		
+		GUILayout.Label("Server Name");
+		serverName = GUILayout.TextField(serverName, 25);
+		GUILayout.Label("Server Description");
+		serverDescription = GUILayout.TextField(serverDescription, 40);
         if (GUILayout.Button("Create Server"))
         {
             SetupServer setupServer = (SetupServer)GameObject.Find("Server").GetComponent(typeof(SetupServer));
-            setupServer.LaunchServer(32, 25000);
+            setupServer.LaunchServer(32, 25000, serverName, serverDescription);
         }
         if (GUILayout.Button("Exit"))
         {
