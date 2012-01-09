@@ -112,27 +112,37 @@ public class ThirdPersonPlayer : MonoBehaviour
 
 	void Die()
 	{
+		NetworkViewID nW = new NetworkViewID();
 		if(networkView.isMine)
 		{
+			nW = gameObject.networkView.viewID;
 			ZombieSpawnManager zm = (ZombieSpawnManager)GameObject.Find("ZombieSpawnManager").GetComponent(typeof(ZombieSpawnManager));
 			zm.SpawnZombiePlayer();
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
-			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
+			Network.Instantiate(smoke, transform.position, transform.rotation, 0);			
 			networkView.RPC("CheckTeams", RPCMode.All, null);
-			Network.Destroy(gameObject);
+			
 		}//end if
 		
+		Network.Destroy(nW);
 		
 	}
 	
 	[RPC]
 	void CheckTeams()
 	{
-		
-		team1List = GameObject.FindGameObjectsWithTag("team1");
-		team2List = GameObject.FindGameObjectsWithTag("team2");
-		team3List = GameObject.FindGameObjectsWithTag("team3");
-		team4List = GameObject.FindGameObjectsWithTag("team4");
+		GameObject[] ObjectList1 = GameObject.FindGameObjectsWithTag("team1");
+		foreach(GameObject g in ObjectList1)
+			team1List.Add(g);
+		GameObject[] ObjectList2 = GameObject.FindGameObjectsWithTag("team2");
+		foreach(GameObject g in ObjectList2)
+			team2List.Add(g);
+		GameObject[] ObjectList3 = GameObject.FindGameObjectsWithTag("team3");
+		foreach(GameObject g in ObjectList3)
+			team3List.Add(g);
+		GameObject[] ObjectList4 = GameObject.FindGameObjectsWithTag("team4");
+		foreach(GameObject g in ObjectList4)
+			team4List.Add(g);
 		
 		if(gameObject.tag == "team1")
 		{

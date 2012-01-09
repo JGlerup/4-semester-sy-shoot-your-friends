@@ -35,15 +35,15 @@ public class Win : MonoBehaviour
 			}
 			if(winningTeamNumber == 2)
 			{
-				//Win2();
+				networkView.RPC("Win2", RPCMode.All, null);
 			}
 			if(winningTeamNumber == 3)
 			{
-				//Win3();
+				networkView.RPC("Win3", RPCMode.All, null);
 			}
 			if(winningTeamNumber == 4)
 			{
-				//Win4();
+				networkView.RPC("Win4", RPCMode.All, null);
 			}
 		}
 	
@@ -54,9 +54,46 @@ public class Win : MonoBehaviour
 	{
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team1"));
 		DisablePlayers();
-		//Write to all who won
+		WriteAll("Team 1");
 		Wait();
-		//goto MainMenu
+		Application.LoadLevel("City1");
+	}
+	[RPC]
+	void Win2()
+	{
+		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team2"));
+		DisablePlayers();
+		WriteAll("Team 2");
+		Wait();
+		Application.LoadLevel("City1");
+	}
+	[RPC]
+	void Win3()
+	{
+		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team3"));
+		DisablePlayers();
+		WriteAll("Team 3");
+		Wait();
+		Application.LoadLevel("City1");
+	}
+	[RPC]
+	void Win4()
+	{
+		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team4"));
+		DisablePlayers();
+		WriteAll("Team 4");
+		Wait();
+		Application.LoadLevel("City1");
+	}
+	
+	
+	
+	void WriteAll(string text)
+	{
+		VictoryText vt = (VictoryText)GameObject.Find("GUI").GetComponent(typeof(VictoryText));
+			vt.enabled = true;
+			vt.WinningTeam = text;
+			
 	}
 	
 	IEnumerator Wait()
@@ -69,27 +106,26 @@ public class Win : MonoBehaviour
 		allZombies.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 				
 		foreach(GameObject g in allZombies)
-		{
-			g.transform.Rotate(0,180,0);
-			g.animation.Play("idle");
+		{			
 			cc = (CharacterController)g.GetComponent(typeof(CharacterController));
 			cc.enabled = false;
-			ml = (MouseLook)g.GetComponent(typeof(MouseLook));
-			ml.enabled = false;
-			tpp = (ThirdPersonPlayer)g.GetComponent(typeof(ThirdPersonPlayer));
-			tpp.enabled = false;
+//			tpp = (ThirdPersonPlayer)g.GetComponent(typeof(ThirdPersonPlayer));
+//			tpp.enabled = false;
+			g.transform.Rotate(0,180,0);
+			g.animation.Play("idle");
 		}
 		
 		foreach(GameObject g in allPlayers)
 		{
-			g.transform.Rotate(0,180,0);
-			g.animation.Play("dance");
+			
 			cc = (CharacterController)g.GetComponent(typeof(CharacterController));
 			cc.enabled = false;
 			ml = (MouseLook)g.GetComponent(typeof(MouseLook));
 			ml.enabled = false;
 			tpp = (ThirdPersonPlayer)g.GetComponent(typeof(ThirdPersonPlayer));
 			tpp.enabled = false;
+			g.transform.Rotate(0,180,0);
+			g.animation.Play("dance");
 		}
 	}
 }
