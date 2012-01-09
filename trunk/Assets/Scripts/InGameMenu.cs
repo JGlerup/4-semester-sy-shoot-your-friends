@@ -44,6 +44,7 @@ public class InGameMenu : MonoBehaviour
 		
 		if (GUILayout.Button ("Quit Game"))
 		{
+			Network.Disconnect();
 			Application.Quit();
 		}
 		
