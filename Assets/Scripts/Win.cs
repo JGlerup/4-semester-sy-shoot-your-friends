@@ -31,7 +31,7 @@ public class Win : MonoBehaviour
 		{
 			if(winningTeamNumber == 1)
 			{
-				Win1();
+				networkView.RPC("Win1", RPCMode.All, null);
 			}
 			if(winningTeamNumber == 2)
 			{
@@ -49,11 +49,14 @@ public class Win : MonoBehaviour
 	
 	}
 	
+	[RPC]
 	void Win1()
 	{
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team1"));
-		DisablePlayers();	
+		DisablePlayers();
+		//Write to all who won
 		Wait();
+		//goto MainMenu
 	}
 	
 	IEnumerator Wait()
