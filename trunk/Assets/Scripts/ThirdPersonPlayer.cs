@@ -119,8 +119,8 @@ public class ThirdPersonPlayer : MonoBehaviour
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
 			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
 			Network.Destroy(gameObject);
-			CheckTeams();
 		}//end if
+		CheckTeams();
 		
 	}
 	
