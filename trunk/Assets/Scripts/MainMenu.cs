@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 	public string serverDescription = "";
     private delegate void GUIMethod();
     private GUIMethod currentGUIMethod;
+	public Texture backGround1;
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class MainMenu : MonoBehaviour
         float ScreenY = ((Screen.height * 0.5f) - (areaHeight * 0.5f));
         GUILayout.BeginArea(new Rect(ScreenX, ScreenY, areaWidth,
         areaHeight));
-
+		//GUILayout.Box(new Texture2D(0, 0, Screen.width, Screen.height),Background1);
         if (GUILayout.Button("Multiplayer"))
         {
             currentGUIMethod = MultiplayerMenu;
@@ -161,6 +162,7 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame 
     public void OnGUI()
     {
+		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), backGround1);
         this.currentGUIMethod();
     }
 }
