@@ -135,6 +135,7 @@ public class MainMenu : MonoBehaviour
             + "Jumping: Space \n"
             + "Running: Hold shift while moving \n"
             + "In-game menu: Escape \n"
+			+ "Change weapon: 1 (machinegun), 2 (rocket launcher) \n"
             + "\n"
             + "--------Server-------- \n"
             + "Join: Multiplayer->Join server-> Connect to a server from the list->Name your player->Choose team \n"
