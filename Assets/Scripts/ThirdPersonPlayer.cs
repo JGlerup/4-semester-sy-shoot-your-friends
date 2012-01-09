@@ -16,10 +16,10 @@ public class ThirdPersonPlayer : MonoBehaviour
 	public AudioClip pain;
 	public Transform smoke;
 	
-	IList<GameObject> team1List = new List<GameObject>();
-	IList<GameObject> team2List = new List<GameObject>();
-	IList<GameObject> team3List = new List<GameObject>();
-	IList<GameObject> team4List = new List<GameObject>();
+	public IList<GameObject> team1List = new List<GameObject>();
+	public IList<GameObject> team2List = new List<GameObject>();
+	public IList<GameObject> team3List = new List<GameObject>();
+	public IList<GameObject> team4List = new List<GameObject>();
 	
     // Use this for initialization
     void Start()
@@ -118,8 +118,8 @@ public class ThirdPersonPlayer : MonoBehaviour
 			zm.SpawnZombiePlayer();
 			AudioSource.PlayClipAtPoint(die, gameObject.transform.position);
 			Network.Instantiate(smoke, transform.position, transform.rotation, 0);
-			Network.Destroy(gameObject);
 			networkView.RPC("CheckTeams", RPCMode.All, null);
+			Network.Destroy(gameObject);
 		}//end if
 		
 		
@@ -128,10 +128,28 @@ public class ThirdPersonPlayer : MonoBehaviour
 	[RPC]
 	void CheckTeams()
 	{
+		
 		team1List = GameObject.FindGameObjectsWithTag("team1");
 		team2List = GameObject.FindGameObjectsWithTag("team2");
 		team3List = GameObject.FindGameObjectsWithTag("team3");
 		team4List = GameObject.FindGameObjectsWithTag("team4");
+		
+		if(gameObject.tag == "team1")
+		{
+			team1List.RemoveAt(0);
+		}
+		if(gameObject.tag == "team2")
+		{
+			team2List.RemoveAt(0);
+		}
+		if(gameObject.tag == "team3")
+		{
+			team3List.RemoveAt(0);
+		}
+		if(gameObject.tag == "team4")
+		{
+			team4List.RemoveAt(0);
+		}
 		
 		if(team1List.Count == 0 && team2List.Count == 0 && team3List.Count == 0)
 		{
