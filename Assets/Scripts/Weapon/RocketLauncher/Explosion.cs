@@ -22,7 +22,6 @@ public class Explosion : MonoBehaviour
             float distance = Vector3.Distance(closestPoint, explosionPosition);
             float hitPoints = 1.0f - Mathf.Clamp01(distance / explosionRadius);
             hitPoints *= explosionDamage;
-
             hit.SendMessageUpwards("ApplyDamage", hitPoints, SendMessageOptions.DontRequireReceiver);
         }
         colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);

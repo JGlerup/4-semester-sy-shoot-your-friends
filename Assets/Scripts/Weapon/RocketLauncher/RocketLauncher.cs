@@ -31,19 +31,21 @@ public class RocketLauncher : MonoBehaviour
     {
         if (Time.time > reloadTime + lastShot && ammoCount > 0)
         {
-            networkView.RPC("InstantiateMissile", RPCMode.All, null);
+            //networkView.RPC("InstantiateMissile", RPCMode.All, null);
+            InstantiateMissile();
             //ammoCount--;
             //UpdateGUIAmmo();
             lastShot = Time.time;
         }
     }
 
-    [RPC]
+    //[RPC]
     void InstantiateMissile()
     {
-        Rigidbody instantiatedProjectile = (Rigidbody)Instantiate(projectile, transform.position, transform.rotation);
-        instantiatedProjectile.transform.Translate(0, 0.15f, 0.8f, Space.Self);
-        instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
+        //Rigidbody instantiatedProjectile = (Rigidbody)Instantiate(projectile, transform.position, transform.rotation);
+        Rigidbody instantiatedProjectile = (Rigidbody)Network.Instantiate(projectile, transform.position, transform.rotation, 0);
+        //instantiatedProjectile.transform.Translate(0, 0.15f, 0.8f, Space.Self);
+        //instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
         Physics.IgnoreCollision(instantiatedProjectile.collider, transform.root.collider);
     }
 

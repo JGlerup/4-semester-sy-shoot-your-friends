@@ -7,6 +7,8 @@ public class Rocket : MonoBehaviour {
     //public AudioClip lyden;
 	// Use this for initialization
 	void Start () {
+        transform.Translate(0, 0.15f, 0.8f, Space.Self);
+        gameObject.rigidbody.velocity = transform.TransformDirection(new Vector3(0, 0, 20.0f));
         timeOut = 3.0f;
         Invoke("Kill", timeOut);
 	}

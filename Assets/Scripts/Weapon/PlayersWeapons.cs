@@ -39,7 +39,8 @@ public class PlayersWeapons : MonoBehaviour
             //MachineGun
             if (Input.GetKeyDown("1"))
             {
-                SelectWeapon(0);
+                //SelectWeapon(0);
+                networkView.RPC("SelectWeapon", RPCMode.All, 0);
                 MachineGun mg = (MachineGun)weaponList[0].GetComponentInChildren(typeof(MachineGun));
                 mg.UpdateAmmoGUI();
                 selectedWeapon = 0;
@@ -47,7 +48,8 @@ public class PlayersWeapons : MonoBehaviour
             //RocketLauncher
             if (Input.GetKeyDown("2"))
             {
-                SelectWeapon(1);
+                //SelectWeapon(1);
+                networkView.RPC("SelectWeapon", RPCMode.All, 1);
                 RocketLauncher rl = (RocketLauncher)weaponList[1].GetComponentInChildren(typeof(RocketLauncher));
                 rl.UpdateGUIAmmo();
                 selectedWeapon = 1;
@@ -55,6 +57,7 @@ public class PlayersWeapons : MonoBehaviour
         }
     }
 
+    [RPC]
     private void SelectWeapon(int index)
     {
         for (int i = 0; i < transform.childCount; i++)

@@ -92,7 +92,7 @@ public class MachineGun : MonoBehaviour {
             }
 
             string teamTag = gameObject.transform.parent.parent.parent.tag;
-            Debug.Log(teamTag);
+            //Debug.Log(teamTag);
             if (hit.collider.tag != teamTag)
             {
                 hit.collider.SendMessageUpwards("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
