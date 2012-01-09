@@ -33,6 +33,7 @@ public class InGameMenu : MonoBehaviour
 		}
 		if (GUILayout.Button ("Disconnect"))
 		{
+			Network.Disconnect();
 			Application.LoadLevel("MainMenu");
 		}
 		
