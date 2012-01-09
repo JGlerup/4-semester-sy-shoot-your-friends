@@ -74,7 +74,8 @@ public class ZombieAI : MonoBehaviour
         {
             if (Time.time > reloadTime + lastShot)
             {
-                hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+                //hit.collider.SendMessageUpwards("ApplyDamage", hit.transform.position, SendMessageOptions.DontRequireReceiver);
+                hit.collider.SendMessageUpwards("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
                 lastShot = Time.time;
                 animation.Play(attackAnimation.name);
             }
@@ -164,7 +165,7 @@ public class ZombieAI : MonoBehaviour
     }
 	
 	[RPC]
-    void ApplyDamage(Vector3 pos)
+    void ApplyDamage(int damage)
     {
 		hitPoints -= damage;
         if (hitPoints <= 0)
@@ -174,7 +175,7 @@ public class ZombieAI : MonoBehaviour
         else
         {
             Debug.Log(hitPoints.ToString());
-            AudioSource.PlayClipAtPoint(pain, pos);
+            AudioSource.PlayClipAtPoint(pain, transform.position);
         }
     }
 	
