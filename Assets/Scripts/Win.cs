@@ -55,8 +55,9 @@ public class Win : MonoBehaviour
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team1"));
 		DisablePlayers();
 		WriteAll("Team 1");
-		Wait();
-		Application.LoadLevel("City1");
+		StartCoroutine(Wait(5.0f,"City1"));
+		//Screen.lockCursor = false;
+		//Application.LoadLevel("City1");
 	}
 	[RPC]
 	void Win2()
@@ -64,8 +65,9 @@ public class Win : MonoBehaviour
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team2"));
 		DisablePlayers();
 		WriteAll("Team 2");
-		Wait();
-		Application.LoadLevel("City1");
+		StartCoroutine(Wait(5.0f,"City1"));
+		//Screen.lockCursor = false;
+		//Application.LoadLevel("City1");
 	}
 	[RPC]
 	void Win3()
@@ -73,8 +75,9 @@ public class Win : MonoBehaviour
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team3"));
 		DisablePlayers();
 		WriteAll("Team 3");
-		Wait();
-		Application.LoadLevel("City1");
+		StartCoroutine(Wait(5.0f,"City1"));
+		//Screen.lockCursor = false;
+		//Application.LoadLevel("City1");
 	}
 	[RPC]
 	void Win4()
@@ -82,8 +85,9 @@ public class Win : MonoBehaviour
 		allPlayers.AddRange(GameObject.FindGameObjectsWithTag("team4"));
 		DisablePlayers();
 		WriteAll("Team 4");
-		Wait();
-		Application.LoadLevel("City1");
+		StartCoroutine(Wait(5.0f,"City1"));
+		//Screen.lockCursor = false;
+		//Application.LoadLevel("City1");
 	}
 	
 	
@@ -96,9 +100,11 @@ public class Win : MonoBehaviour
 			
 	}
 	
-	IEnumerator Wait()
+	IEnumerator Wait(float delay, string level)
 	{
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(delay);
+		Screen.lockCursor = false;
+		Application.LoadLevel(level);
 	}
 	
 	void DisablePlayers()
