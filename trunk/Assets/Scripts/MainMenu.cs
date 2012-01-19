@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
         {
             this.currentGUIMethod = CreateServerMenu;
         }
-        if (GUILayout.Button("Exit"))
+        if (GUILayout.Button("Back"))
         {
             this.currentGUIMethod = MainMenuCreate;
         }
@@ -84,7 +84,7 @@ public class MainMenu : MonoBehaviour
             SetupServer setupServer = (SetupServer)GameObject.Find("Server").GetComponent(typeof(SetupServer));
             setupServer.LaunchServer(32, 25000, serverName, serverDescription);
         }
-        if (GUILayout.Button("Exit"))
+        if (GUILayout.Button("Back"))
         {
             this.currentGUIMethod = MultiplayerMenu;
         }
@@ -120,6 +120,10 @@ public class MainMenu : MonoBehaviour
             }
             GUILayout.EndHorizontal();
         }
+		if (GUILayout.Button("Back"))
+		{
+			this.currentGUIMethod = MainMenuCreate;
+		}
     }
 
     private void HowToPlayMenu()
