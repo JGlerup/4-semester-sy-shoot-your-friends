@@ -49,6 +49,10 @@ public class ThirdPersonPlayer : MonoBehaviour
         //{
         //    networkView.RPC ("Shoot", RPCMode.All, null);
         //}
+		if (Input.GetKey(KeyCode.K))
+  		{
+   			Die();
+  		}
 		
 		if (inGameMenu.enabled) 
 		{	
